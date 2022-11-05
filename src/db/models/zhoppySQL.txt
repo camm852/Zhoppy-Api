@@ -1,0 +1,203 @@
+import { DataTypes } from 'sequelize'
+import db from '../../db/connection'
+
+
+export const Rols = db.define('Rols', {
+  idRol: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey: true,
+    unique: true
+  },
+  nameRol: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+}, {timestamps: false})
+
+export const Cities = db.define('Cities', {
+  idCity: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey: true,
+    unique: true
+  },
+  nameCity: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+})
+
+export const Users = db.define('Users', {
+  idUser: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey: true,
+    unique: true
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  phone: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+})
+
+Users.belongsTo(Rols, {
+  foreignKey: {
+    name: 'idRol'
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE'
+})
+
+export const Providers = db.define('Providers', {
+  idProvider: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey: true,
+    unique: true
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  phone: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+})
+
+Providers.belongsTo(Cities, {
+  foreignKey: {
+    name: 'idCity'
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE'
+})
+
+export const Purchases = db.define('Purchases', {
+  idPurchase: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey: true,
+    unique: true
+  },
+  datePurchase: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  total: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false
+  }
+})
+
+Purchases.belongsTo(Users, {
+  foreignKey: {
+    name: 'idUser'
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE'
+})
+
+export const Images = db.define('Images', {
+  idImage: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    unique: true,
+    primaryKey: true
+  },url: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  url: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+})
+
+export const Shoes = db.define('Shoes', {
+  idShoe: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    unique: true,
+    primaryKey: true
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  price: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false
+  },
+  stock: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false
+  },
+  description: {
+    type: DataTypes.TEXT
+  }
+})
+
+Shoes.belongsTo(Images, {
+  foreignKey: {
+    name: 'idImage'
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE'
+})
+
+
+Shoes.belongsTo(Providers, {
+  foreignKey: {
+    name: 'idProvider'
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE'
+})
+
+export const ShoesPurchases = db.define('ShoePurchases', {
+  
+})
+
+ShoesPurchases.belongsTo(Shoes, {
+  foreignKey: {
+    name: 'idShoe'
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'RESTRICT'
+})
+
+ShoesPurchases.belongsTo(Purchases, {
+  foreignKey: {
+    name: 'idPurchase'
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'RESTRICT'
+})
+
+//Shoe.belongsToMany(Purchase, { through: ShoesPurchases })
+//Purchase.belongsToMany(Shoe, { through: ShoesPurchases })
+
+
+// Object.values(tables).map(async element => await element.sync())
