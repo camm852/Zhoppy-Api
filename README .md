@@ -187,7 +187,7 @@ To run this project, you will need to add the following environment variables to
 
 `DATABASE_PASSWORD`: Database password
 
-`JWT_SECRET`: Word to unsign a JWT
+`JWT_SECRET`: Word to unsign a JWT 
 
 #### Cloudnary config
 
