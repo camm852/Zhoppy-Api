@@ -196,7 +196,7 @@ To run this project, you will need to add the following environment variables to
 `API_KEY`
 
 `API_SECRET`
-
+ 
 
 ## Authors
 
