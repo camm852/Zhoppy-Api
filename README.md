@@ -198,6 +198,11 @@ To run this project, you will need to add the following environment variables to
 `API_SECRET`
  
 
+## Database
+
+![Database](https://res.cloudinary.com/daboamwpv/image/upload/v1667684678/Captura_de_pantalla_20221105_044152_g8tqy1.png)
+
+
 ## Authors
 
 - [@camm852](https://github.com/camm852)
